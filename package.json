@@ -1,6 +1,6 @@
 {
   "name": "bel-create-element",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "just the bits",
   "main": "index.js",
   "scripts": {
@@ -13,9 +13,11 @@
     "url": "git://github.com/jrjurman/bel-create-element"
   },
   "keywords": [
+    "bel",
     "virtual-dom",
     "element",
-    "diffhtml"
+    "diffhtml",
+    "tram-one"
   ],
   "files": [
     "index.js"
