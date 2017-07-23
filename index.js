@@ -1,5 +1,4 @@
 var document = require('global/document')
-var hyperx = require('hyperx')
 var onload = require('on-load')
 
 var SVGNS = 'http://www.w3.org/2000/svg'
@@ -149,6 +148,5 @@ function belCreateElement (tag, props, children) {
   return el
 }
 
-module.exports = hyperx(belCreateElement, {comments: true})
-module.exports.default = module.exports
+module.exports = belCreateElement
 module.exports.createElement = belCreateElement

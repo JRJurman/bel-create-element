@@ -1,12 +1,15 @@
 var test = require('tape')
-var bel = require('../')
+var belCreateElement = require('../')
+var hyperx = require('hyperx')
+
+var h = hyperx(belCreateElement, {comments: true})
 
 test('creates an element', function (t) {
   t.plan(3)
-  var button = bel`<button onclick=${function () {
+  var button = h`<button onclick=${function () {
     onselected('success')
   }}>click me</button>`
-  var result = bel`<ul>
+  var result = h`<ul>
     <li>${button}</li>
   </ul>`
   function onselected (result) {
@@ -20,9 +23,9 @@ test('creates an element', function (t) {
 
 test('using class and className', function (t) {
   t.plan(2)
-  var result = bel`<div className="test1"></div>`
+  var result = h`<div className="test1"></div>`
   t.equal(result.className, 'test1')
-  result = bel`<div class="test2 another"></div>`
+  result = h`<div class="test2 another"></div>`
   t.equal(result.className, 'test2 another')
   t.end()
 })

@@ -1,7 +1,7 @@
 {
-  "name": "bel",
-  "version": "4.6.1",
-  "description": "A simple extension to native elements",
+  "name": "bel-create-element",
+  "version": "1.0.0",
+  "description": "just the bits",
   "main": "index.js",
   "scripts": {
     "start": "wzrd test/index.js:bundle.js",
@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/shama/bel"
+    "url": "git://github.com/jrjurman/bel-create-element"
   },
   "keywords": [
     "virtual-dom",
@@ -18,28 +18,29 @@
     "diffhtml"
   ],
   "files": [
-    "index.js",
-    "create.js"
+    "index.js"
   ],
-  "author": "Kyle Robinson Young <kyle@dontkry.com> (http://dontkry.com)",
+  "original-author": "Kyle Robinson Young <kyle@dontkry.com> (http://dontkry.com)",
+  "author": "Jesse Jurman <j.r.jurman@gmail.com> (http://jrjurman.com)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/shama/bel/issues"
+    "url": "https://github.com/jrjurman/bel-create-element/issues"
   },
-  "homepage": "https://github.com/shama/bel",
+  "homepage": "https://github.com/jrjurman/bel-create-element",
   "dependencies": {
     "global": "^4.3.0",
-    "hyperx": "^2.3.0",
     "on-load": "^3.2.0"
   },
   "devDependencies": {
     "browser-process-hrtime": "^0.1.2",
     "browserify": "^14.1.0",
     "electron-prebuilt": "^0.36.9",
+    "hyperx": "^2.3.0",
     "morphdom": "^2.1.1",
     "standard": "^9.0.2",
     "tape": "^4.6.0",
     "testron": "^1.2.0",
+    "virtual-dom": "^2.1.1",
     "wzrd": "^1.4.0"
   }
 }

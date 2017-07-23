@@ -1,17 +1,20 @@
 var test = require('tape')
-var bel = require('../')
+var belCreateElement = require('../')
+var hyperx = require('hyperx')
 var document = require('global/document')
 var morphdom = require('morphdom')
 
+var h = hyperx(belCreateElement, {comments: true})
+
 test('fire onload and unload events', function (t) {
   t.plan(2)
-  var element = bel`<div onload=${function (el) {
+  var element = h`<div onload=${function (el) {
     t.equal(el.textContent, 'hi', 'fired onload')
   }} onunload=${function (el) {
     t.equal(el.textContent, 'hi', 'fired onunload')
     t.end()
   }}>hi</div>`
-  var result = bel`<div>
+  var result = h`<div>
     ${element}
   </div>`
   document.body.appendChild(result)
@@ -21,12 +24,12 @@ test('fire onload and unload events', function (t) {
 test('onload with nested existing elements', function (t) {
   t.plan(3)
   function render1 () {
-    return bel`<ul onload=${function () {
+    return h`<ul onload=${function () {
       t.ok(true, 'parent fired onload')
     }}><li>hi</li></ul>`
   }
   function render2 () {
-    return bel`<ul><li onload=${function (el) {
+    return h`<ul><li onload=${function (el) {
       t.ok(true, 'nested fired onload')
     }} onunload=${function (el) {
       t.ok(true, 'nested fired onunload')
@@ -34,7 +37,7 @@ test('onload with nested existing elements', function (t) {
     }}>hi</li></ul>`
   }
   function render3 () {
-    return bel`<ul><li>hi</li></ul>`
+    return h`<ul><li>hi</li></ul>`
   }
   var root = render1()
   document.body.appendChild(root)

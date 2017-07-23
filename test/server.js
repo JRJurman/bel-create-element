@@ -1,9 +1,12 @@
 var test = require('tape')
-var bel = require('../')
+var belCreateElement = require('../')
+var hyperx = require('hyperx')
+
+var h = hyperx(belCreateElement, {comments: true})
 
 test('server side render', function (t) {
   t.plan(2)
-  var element = bel`<div class="testing">
+  var element = h`<div class="testing">
     <h1>hello!</h1>
   </div>`
   var result = element.toString()
@@ -14,8 +17,8 @@ test('server side render', function (t) {
 
 test('passing another element to bel on server side render', function (t) {
   t.plan(1)
-  var button = bel`<button>click</button>`
-  var element = bel`<div class="testing">
+  var button = h`<button>click</button>`
+  var element = h`<div class="testing">
     ${button}
   </div>`
   var result = element.toString()
@@ -26,7 +29,7 @@ test('passing another element to bel on server side render', function (t) {
 test('style attribute', function (t) {
   t.plan(1)
   var name = 'test'
-  var result = bel`<h1 style="color: red">Hey ${name.toUpperCase()}, <span style="color: blue">This</span> is a card!!!</h1>`
+  var result = h`<h1 style="color: red">Hey ${name.toUpperCase()}, <span style="color: blue">This</span> is a card!!!</h1>`
   var expected = '<h1 style="color: red">Hey TEST, <span style="color: blue">This</span> is a card!!!</h1>'
   t.equal(result.toString(), expected)
   t.end()
