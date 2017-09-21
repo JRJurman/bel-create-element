@@ -1,5 +1,5 @@
-var document = require('global/document')
-var onload = require('on-load')
+const isBrowser = typeof window !== 'undefined'
+const document = isBrowser ? window.document : require('min-document')
 
 var SVGNS = 'http://www.w3.org/2000/svg'
 var XLINKNS = 'http://www.w3.org/1999/xlink'
@@ -57,21 +57,6 @@ function belCreateElement (tag, props, children) {
     return document.createComment(props.comment)
   } else {
     el = document.createElement(tag)
-  }
-
-  // If adding onload events
-  if (props.onload || props.onunload) {
-    var load = props.onload || function () {}
-    var unload = props.onunload || function () {}
-    onload(el, function belOnload () {
-      load(el)
-    }, function belOnunload () {
-      unload(el)
-    },
-    // We have to use non-standard `caller` to find who invokes `belCreateElement`
-    belCreateElement.caller.caller.caller)
-    delete props.onload
-    delete props.onunload
   }
 
   // Create the properties

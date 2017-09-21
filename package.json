@@ -1,6 +1,6 @@
 {
   "name": "bel-create-element",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "description": "just the bits",
   "main": "index.js",
   "scripts": {
@@ -30,8 +30,7 @@
   },
   "homepage": "https://github.com/jrjurman/bel-create-element",
   "dependencies": {
-    "global": "^4.3.0",
-    "on-load": "^3.2.0"
+    "min-document": "^2.19.0"
   },
   "devDependencies": {
     "browser-process-hrtime": "^0.1.2",
