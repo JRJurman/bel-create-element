@@ -107,6 +107,53 @@ test('adjacent text nodes', function (t) {
   t.end()
 })
 
+test('space in only-child text nodes', function (t) {
+  t.plan(1)
+  var result = h`
+    <span>
+      surrounding
+      newlines
+    </span>
+  `
+  t.equal(result.outerHTML, '<span>surrounding newlines</span>', 'should remove extra space')
+  t.end()
+})
+
+test('space between text and non-text nodes', function (t) {
+  t.plan(1)
+  var result = h`
+    <p>
+      <dfn>whitespace</dfn>
+      is empty
+    </p>
+  `
+  t.equal(result.outerHTML, '<p><dfn>whitespace</dfn> is empty</p>', 'should have correct output')
+  t.end()
+})
+
+test('space between non-text nodes', function (t) {
+  t.plan(1)
+  var result = h`
+    <p>
+      <dfn>whitespace</dfn>
+      <em>is beautiful</em>
+    </p>
+  `
+  t.equal(result.outerHTML, '<p><dfn>whitespace</dfn> <em>is beautiful</em></p>', 'should have correct output')
+  t.end()
+})
+
+test('space in <pre>', function (t) {
+  t.plan(1)
+  var result = h`
+    <pre>
+      whitespace is empty
+    </pre>
+  `
+  t.equal(result.outerHTML, '<pre>\n      whitespace is empty\n    </pre>', 'should preserve space')
+  t.end()
+})
+
 test('for attribute is set correctly', function (t) {
   t.plan(1)
   var result = h`<div>
@@ -114,5 +161,14 @@ test('for attribute is set correctly', function (t) {
     <label for="heyo">label</label>
   </div>`
   t.ok(result.outerHTML.indexOf('<label for="heyo">label</label>') !== -1, 'contains for="heyo"')
+  t.end()
+})
+
+test('allow objects to be passed', function (t) {
+  t.plan(1)
+  var result = h`<div>
+    <div ${{ foo: 'bar' }}>hey</div>
+  </div>`
+  t.ok(result.outerHTML.indexOf('<div foo="bar">hey</div>') !== -1, 'contains foo="bar"')
   t.end()
 })
