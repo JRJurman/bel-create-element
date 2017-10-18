@@ -1,4 +1,5 @@
 var test = require('tape')
+
 var belCreateElement = require('../')
 var hyperx = require('hyperx')
 
