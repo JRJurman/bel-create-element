@@ -1,6 +1,6 @@
 {
   "name": "bel-create-element",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "just the bits",
   "main": "index.js",
   "scripts": {
@@ -18,9 +18,6 @@
     "element",
     "diffhtml",
     "tram-one"
-  ],
-  "files": [
-    "index.js"
   ],
   "original-author": "Kyle Robinson Young <kyle@dontkry.com> (http://dontkry.com)",
   "author": "Jesse Jurman <j.r.jurman@gmail.com> (http://jrjurman.com)",
