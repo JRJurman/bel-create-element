@@ -1,4 +1,7 @@
-var document = typeof window !== 'undefined' ? window.document : require('min-document')
+var document = typeof window !== 'undefined'
+  ? window.document
+  : require('domino').createWindow().document
+
 var appendChild = require('./appendChild')
 
 var SVGNS = 'http://www.w3.org/2000/svg'

@@ -27,7 +27,7 @@
   },
   "homepage": "https://github.com/jrjurman/bel-create-element",
   "dependencies": {
-    "min-document": "^2.19.0"
+    "domino": "^2.0.0"
   },
   "devDependencies": {
     "browser-process-hrtime": "^0.1.2",
