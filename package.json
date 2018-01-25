@@ -14,6 +14,8 @@
   },
   "keywords": [
     "bel",
+    "bel-create-element",
+    "belit",
     "virtual-dom",
     "element",
     "diffhtml",
@@ -35,7 +37,6 @@
     "electron": "^1.7.9",
     "hyperx": "^2.3.1",
     "is-electron": "^2.1.0",
-    "morphdom": "^2.3.3",
     "standard": "^10.0.3",
     "tape": "^4.8.0",
     "tape-run": "^3.0.0",
