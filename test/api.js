@@ -24,7 +24,7 @@ test('creates an element', function (t) {
   }
 
   t.equal(result.tagName, 'UL')
-  t.equal(result.querySelector('button').textContent, 'click me')
+  t.assert(result.querySelector('button').textContent.match('click me'))
 
   button.click()
 })
