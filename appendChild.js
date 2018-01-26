@@ -1,4 +1,6 @@
-var document = typeof window !== 'undefined' ? window.document : require('min-document')
+var document = typeof window !== 'undefined'
+  ? window.document
+  : require('domino').createWindow().document
 
 var trailingNewlineRegex = /\n[\s]+$/
 var leadingNewlineRegex = /^\n[\s]+/

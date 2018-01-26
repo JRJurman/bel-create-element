@@ -10,7 +10,7 @@ test('server side render', function (t) {
   var element = h`<div class="testing">
     <h1>hello!</h1>
   </div>`
-  var result = element.toString()
+  var result = element.outerHTML
   t.ok(result.indexOf('<h1>hello!</h1>') !== -1, 'contains a child element')
   t.ok(result.indexOf('<div class="testing">') !== -1, 'attribute gets set')
   t.end()
@@ -22,7 +22,7 @@ test('passing another element to bel on server side render', function (t) {
   var element = h`<div class="testing">
     ${button}
   </div>`
-  var result = element.toString()
+  var result = element.outerHTML
   t.ok(result.indexOf('<button>click</button>') !== -1, 'button rendered correctly')
   t.end()
 })
@@ -32,6 +32,6 @@ test('style attribute', function (t) {
   var name = 'test'
   var result = h`<h1 style="color: red">Hey ${name.toUpperCase()}, <span style="color: blue">This</span> is a card!!!</h1>`
   var expected = '<h1 style="color: red">Hey TEST, <span style="color: blue">This</span> is a card!!!</h1>'
-  t.equal(result.toString(), expected)
+  t.equal(result.outerHTML, expected)
   t.end()
 })

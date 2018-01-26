@@ -1,7 +1,7 @@
 {
-  "name": "bel-create-element",
-  "version": "2.0.2",
-  "description": "just the bits",
+  "name": "belit",
+  "version": "3.0.0",
+  "description": "A simple function for creating composable DOM elements using tagged template strings.",
   "main": "index.js",
   "scripts": {
     "start": "wzrd test/index.js:bundle.js",
@@ -10,10 +10,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/jrjurman/bel-create-element"
+    "url": "git://github.com/jrjurman/belit"
   },
   "keywords": [
     "bel",
+    "bel-create-element",
+    "belit",
     "virtual-dom",
     "element",
     "diffhtml",
@@ -27,7 +29,7 @@
   },
   "homepage": "https://github.com/jrjurman/bel-create-element",
   "dependencies": {
-    "min-document": "^2.19.0"
+    "domino": "^2.0.0"
   },
   "devDependencies": {
     "browser-process-hrtime": "^0.1.2",
@@ -35,7 +37,6 @@
     "electron": "^1.7.9",
     "hyperx": "^2.3.1",
     "is-electron": "^2.1.0",
-    "morphdom": "^2.3.3",
     "standard": "^10.0.3",
     "tape": "^4.8.0",
     "tape-run": "^3.0.0",

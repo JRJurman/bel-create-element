@@ -1,8 +1,8 @@
 var bench = require('./bench')
-var bel = require('../')
-var vdom = require('virtual-dom')
-var h = vdom.h
-var document = require('global/document')
+var belCreateElement = require('../')
+var hyperx = require('hyperx')
+
+var h = hyperx(belCreateElement, {comments: true})
 
 function raw (label, items) {
   var div = document.createElement('div')
@@ -22,32 +22,20 @@ function raw (label, items) {
 }
 
 function withBel (label, items) {
-  return bel`<div>
+  return h`<div>
     <h1>${label}</h1>
     <ul>
       ${items.map(function (item) {
-        return bel`<li>${item}</li>`
+        return h`<li>${item}</li>`
       })}
     </ul>
   </div>`
-}
-
-function withVDOM (label, items) {
-  return h('div', [
-    h('h1', label),
-    h('ul', items.map(function (item) {
-      return h('li', item)
-    }))
-  ])
 }
 
 console.log('Creating trees...')
 var data = ['grizzly', 'polar', 'brown']
 bench('raw', function () {
   raw('test', data)
-})
-bench('withVDOM', function () {
-  withVDOM('test', data)
 })
 bench('withBel', function () {
   withBel('test', data)

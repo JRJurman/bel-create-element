@@ -1,4 +1,4 @@
-# bel-create-element
+# belit
 
 Fork of a simple library for composable DOM elements using [tagged template strings](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals).
 
