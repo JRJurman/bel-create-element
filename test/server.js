@@ -1,9 +1,9 @@
 var test = require('tape')
 
-var belCreateElement = require('../')
+var belit = require('../')()
 var hyperx = require('hyperx')
 
-var h = hyperx(belCreateElement, {comments: true})
+var h = hyperx(belit, {comments: true})
 
 test('server side render', function (t) {
   t.plan(2)

@@ -4,8 +4,9 @@
   "description": "A simple function for creating composable DOM elements using tagged template strings.",
   "main": "index.js",
   "scripts": {
+    "lint": "",
     "start": "wzrd test/index.js:bundle.js",
-    "test": "standard && node test/server.js && browserify test/index.js | tape-run",
+    "test": "node test/server.js && browserify test/index.js | tape-run",
     "bench": "wzrd bench/index.js:bundle.js"
   },
   "repository": {
