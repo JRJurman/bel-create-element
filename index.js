@@ -28,10 +28,10 @@ const belitCreateElement = (namespace) => (tag, props, children) => {
     return document.createComment(props.comment)
   }
 
-  // Create the element
+  // create the element
   const element = namespace ? document.createElementNS(namespace, tag) : document.createElement(tag)
 
-  // Attach the properties
+  // attach the properties
   Object.keys(props)
     .filter(isNotXMLNSprop)
     .filter(containsOwnProp(props))

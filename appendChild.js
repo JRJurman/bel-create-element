@@ -2,36 +2,37 @@ const document = typeof window !== 'undefined'
   ? window.document
   : require('domino').createWindow().document
 
-const appendChild = (el, childs) => {
+const parseNodeAsString = node => ( typeof node === 'number' ||
+                                typeof node === 'boolean' ||
+                                typeof node === 'function' ||
+                                node instanceof Date ||
+                                node instanceof RegExp) ? node.toString() : node
+
+const isNotWhitespace = node => !(typeof node === 'string' && /^[\n\r\s]+$/.test(node))
+
+const appendChild = (element, childs) => {
   if (!Array.isArray(childs)) return
-  for (let i = 0; i < childs.length; i++) {
-    let node = childs[i]
-    if (Array.isArray(node)) {
-      appendChild(el, node)
-      continue
-    }
-
-    if (typeof node === 'number' ||
-      typeof node === 'boolean' ||
-      typeof node === 'function' ||
-      node instanceof Date ||
-      node instanceof RegExp) {
-      node = node.toString()
-    }
-
-    if (typeof node === 'string') {
-      if (/^[\n\r\s]+$/.test(node)) continue
-      if (el.lastChild && el.lastChild.nodeName === '#text') {
-        el.lastChild.nodeValue += node
-        continue
+  childs
+    .map(parseNodeAsString)
+    .filter(isNotWhitespace)
+    .forEach((node) => {
+      if (Array.isArray(node)) {
+        appendChild(element, node)
+        return
       }
-      node = document.createTextNode(node)
-    }
 
-    if (node && node.nodeType) {
-      el.appendChild(node)
-    }
-  }
+      if (typeof node === 'string') {
+        if (element.lastChild && element.lastChild.nodeName === '#text') {
+          element.lastChild.nodeValue += node
+          return
+        }
+        node = document.createTextNode(node)
+      }
+
+      if (node && node.nodeType) {
+        element.appendChild(node)
+      }
+    })
 }
 
 module.exports = appendChild
