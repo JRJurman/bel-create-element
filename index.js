@@ -1,101 +1,52 @@
-var document = typeof window !== 'undefined'
-  ? window.document
-  : require('domino').createWindow().document
+/* eslint-disable no-negated-condition, no-return-assign */
+const document = typeof window !== 'undefined' ? window.document : require('domino').createWindow().document
 
-var appendChild = require('./appendChild')
+const appendChild = require('./appendChild')
 
-var SVGNS = 'http://www.w3.org/2000/svg'
-var XLINKNS = 'http://www.w3.org/1999/xlink'
+const COMMENT_TAG = '!--'
 
-var BOOL_PROPS = [
-  'autofocus', 'checked', 'defaultchecked', 'disabled', 'formnovalidate',
-  'indeterminate', 'readonly', 'required', 'selected', 'willvalidate'
-]
+// filters for attributes
+const isNotXMLNSprop = prop => !/^xmlns($|:)/i.test(prop)
+const containsOwnProp = props => prop => Object.prototype.hasOwnProperty.call(props, prop)
 
-var COMMENT_TAG = '!--'
+// map to objects so we know their value
+const toObjectList = props => prop => ({key: prop, value: props[prop]})
 
-var SVG_TAGS = [
-  'svg', 'altGlyph', 'altGlyphDef', 'altGlyphItem', 'animate', 'animateColor',
-  'animateMotion', 'animateTransform', 'circle', 'clipPath', 'color-profile',
-  'cursor', 'defs', 'desc', 'ellipse', 'feBlend', 'feColorMatrix',
-  'feComponentTransfer', 'feComposite', 'feConvolveMatrix',
-  'feDiffuseLighting', 'feDisplacementMap', 'feDistantLight', 'feFlood',
-  'feFuncA', 'feFuncB', 'feFuncG', 'feFuncR', 'feGaussianBlur', 'feImage',
-  'feMerge', 'feMergeNode', 'feMorphology', 'feOffset', 'fePointLight',
-  'feSpecularLighting', 'feSpotLight', 'feTile', 'feTurbulence', 'filter',
-  'font', 'font-face', 'font-face-format', 'font-face-name', 'font-face-src',
-  'font-face-uri', 'foreignObject', 'g', 'glyph', 'glyphRef', 'hkern', 'image',
-  'line', 'linearGradient', 'marker', 'mask', 'metadata', 'missing-glyph',
-  'mpath', 'path', 'pattern', 'polygon', 'polyline', 'radialGradient', 'rect',
-  'set', 'stop', 'switch', 'symbol', 'text', 'textPath', 'title', 'tref',
-  'tspan', 'use', 'view', 'vkern'
-]
+// transformations for attributes
+const normalizeClassName = prop => prop.key.toLowerCase() === 'classname' ? ({key: 'class', value: prop.value}) : prop
+const htmlForToFor = prop => prop.key === 'htmlFor' ? ({key: 'for', value: prop.value}) : prop
 
-function belCreateElement (tag, props, children) {
-  var el
+// handlers that can be filtered on
+// if something gets processed, we return false (using ![])
+// otherwise, it returns true, indicating that this thing needs to be processed
+const handleOnAttrSetter = element => prop => prop.key.slice(0, 2) === 'on' ? ![element[prop.key] = prop.value] : true
+const handleNamespaceAttrSetter = (element, namespace) => prop => namespace ? ![element.setAttributeNS(null, prop.key, prop.value)] : true
+const handleAttrSetter = element => prop => element.setAttribute(prop.key, prop.value)
 
-  // If an svg tag, it needs a namespace
-  if (SVG_TAGS.indexOf(tag) !== -1) {
-    props.namespace = SVGNS
-  }
-
-  // If we are using a namespace
-  var ns = false
-  if (props.namespace) {
-    ns = props.namespace
-    delete props.namespace
-  }
-
-  // Create the element
-  if (ns) {
-    el = document.createElementNS(ns, tag)
-  } else if (tag === COMMENT_TAG) {
+const belitCreateElement = (namespace) => (tag, props, children) => {
+  // if the tag is a comment
+  if (tag === COMMENT_TAG) {
     return document.createComment(props.comment)
-  } else {
-    el = document.createElement(tag)
   }
 
-  // Create the properties
-  for (var p in props) {
-    if (props.hasOwnProperty(p)) {
-      var key = p.toLowerCase()
-      var val = props[p]
-      // Normalize className
-      if (key === 'classname') {
-        key = 'class'
-        p = 'class'
-      }
-      // The for attribute gets transformed to htmlFor, but we just set as for
-      if (p === 'htmlFor') {
-        p = 'for'
-      }
-      // If a property is boolean, set itself to the key
-      if (BOOL_PROPS.indexOf(key) !== -1) {
-        if (val === 'true') val = key
-        else if (val === 'false') continue
-      }
-      // If a property prefers being set directly vs setAttribute
-      if (key.slice(0, 2) === 'on') {
-        el[p] = val
-      } else {
-        if (ns) {
-          if (p === 'xlink:href') {
-            el.setAttributeNS(XLINKNS, p, val)
-          } else if (/^xmlns($|:)/i.test(p)) {
-            // skip xmlns definitions
-          } else {
-            el.setAttributeNS(null, p, val)
-          }
-        } else {
-          el.setAttribute(p, val)
-        }
-      }
-    }
-  }
+  // create the element
+  const element = namespace ? document.createElementNS(namespace, tag) : document.createElement(tag)
 
-  appendChild(el, children)
-  return el
+  // attach the properties
+  Object.keys(props)
+    .filter(isNotXMLNSprop)
+    .filter(containsOwnProp(props))
+    .map(toObjectList(props))
+    .map(normalizeClassName)
+    .map(htmlForToFor)
+    .filter(handleOnAttrSetter(element))
+    .filter(handleNamespaceAttrSetter(element, namespace))
+    .filter(handleAttrSetter(element))
+
+  appendChild(element, children)
+  return element
 }
 
-module.exports = belCreateElement
-module.exports.createElement = belCreateElement
+module.exports = belitCreateElement
+module.exports.html = belitCreateElement()
+module.exports.svg = belitCreateElement('http://www.w3.org/2000/svg')

@@ -1,8 +1,8 @@
 var test = require('tape')
-var belCreateElement = require('../')
+var belit = require('../')()
 var hyperx = require('hyperx')
 
-var h = hyperx(belCreateElement, {comments: true})
+var h = hyperx(belit, {comments: true})
 
 test('creates an element', function (t) {
   t.plan(3)
@@ -24,7 +24,7 @@ test('creates an element', function (t) {
   }
 
   t.equal(result.tagName, 'UL')
-  t.equal(result.querySelector('button').textContent, 'click me')
+  t.assert(result.querySelector('button').textContent.match('click me'))
 
   button.click()
 })
