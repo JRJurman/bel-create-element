@@ -24,8 +24,8 @@ You can pass in a namespace to properly create namespaced elements (like svg)
 const belit = require('belit')
 const hyperx = require('hyperx')
 
-const html = hyperx(belit('http://www.w3.org/2000/svg'), {comments: true})
-const div = html`
+const svg = hyperx(belit('http://www.w3.org/2000/svg'), {comments: true})
+const div = svg`
   <svg height="200" width="200">
     <rect width="100" height="100" />
   </svg>
@@ -37,8 +37,8 @@ You can use the `belit.html` and `belit.svg` instead of calling the top-level fu
 const belit = require('belit')
 const hyperx = require('hyperx')
 
-const html = hyperx(belit.svg, {comments: true})
-const div = html`
+const svg = hyperx(belit.svg, {comments: true})
+const div = svg`
   <svg height="200" width="200">
     <rect width="100" height="100" />
   </svg>
