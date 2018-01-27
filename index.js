@@ -1,3 +1,4 @@
+/* eslint-disable no-negated-condition, no-return-assign */
 const document = typeof window !== 'undefined' ? window.document : require('domino').createWindow().document
 
 const appendChild = require('./appendChild')
@@ -6,14 +7,14 @@ const COMMENT_TAG = '!--'
 
 // filters for attributes
 const isNotXMLNSprop = prop => !/^xmlns($|:)/i.test(prop)
-const containsOwnProp = props => prop => props.hasOwnProperty(prop)
+const containsOwnProp = props => prop => Object.prototype.hasOwnProperty.call(props, prop)
 
 // map to objects so we know their value
-const toObjectList = props => prop => ({key:prop, value:props[prop]})
+const toObjectList = props => prop => ({key: prop, value: props[prop]})
 
 // transformations for attributes
-const normalizeClassName = prop => prop.key.toLowerCase() === 'classname' ? ({key:'class', value:prop.value}) : prop
-const htmlForToFor = prop => prop.key === 'htmlFor' ? ({key:'for', value:prop.value}) : prop
+const normalizeClassName = prop => prop.key.toLowerCase() === 'classname' ? ({key: 'class', value: prop.value}) : prop
+const htmlForToFor = prop => prop.key === 'htmlFor' ? ({key: 'for', value: prop.value}) : prop
 
 // handlers that can be filtered on
 // if something gets processed, we return false (using ![])

@@ -1,12 +1,13 @@
-const document = typeof window !== 'undefined'
-  ? window.document
-  : require('domino').createWindow().document
+/* eslint-disable no-negated-condition */
+const document = typeof window !== 'undefined' ?
+  window.document :
+  require('domino').createWindow().document
 
-const parseNodeAsString = node => ( typeof node === 'number' ||
-                                typeof node === 'boolean' ||
-                                typeof node === 'function' ||
-                                node instanceof Date ||
-                                node instanceof RegExp) ? node.toString() : node
+const parseNodeAsString = node => (typeof node === 'number' ||
+                                   typeof node === 'boolean' ||
+                                   typeof node === 'function' ||
+                                   node instanceof Date ||
+                                   node instanceof RegExp) ? node.toString() : node
 
 const isNotWhitespace = node => !(typeof node === 'string' && /^[\n\r\s]+$/.test(node))
 
