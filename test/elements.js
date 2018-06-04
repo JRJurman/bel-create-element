@@ -90,6 +90,15 @@ test('for attribute is set correctly', function (t) {
   t.end()
 })
 
+test('events are added to element events property', function (t) {
+  t.plan(1)
+  var result = html`<div>
+    <input oninput="onInputFunction" onkeyup="onKeyUpFunction" />
+  </div>`
+  t.deepEqual(result.querySelector('input').events, ['oninput', 'onkeyup'])
+  t.end()
+})
+
 test('allow objects to be passed', function (t) {
   t.plan(1)
   var result = html`<div>
