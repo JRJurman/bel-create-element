@@ -1,6 +1,6 @@
 {
   "name": "belit",
-  "version": "4.0.0",
+  "version": "4.1.0",
   "description": "A simple function for creating composable DOM elements using tagged template strings.",
   "main": "index.js",
   "scripts": {
@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/jrjurman/belit"
+    "url": "git://github.com/Tram-One/belit"
   },
   "keywords": [
     "bel",
@@ -26,9 +26,9 @@
   "author": "Jesse Jurman <j.r.jurman@gmail.com> (http://jrjurman.com)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/jrjurman/bel-create-element/issues"
+    "url": "https://github.com/Tram-One/bel-create-element/issues"
   },
-  "homepage": "https://github.com/jrjurman/bel-create-element",
+  "homepage": "https://github.com/Tram-One/bel-create-element",
   "dependencies": {
     "domino": "^2.0.0"
   },

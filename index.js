@@ -16,11 +16,17 @@ const toObjectList = props => prop => ({key: prop, value: props[prop]})
 const normalizeClassName = prop => prop.key.toLowerCase() === 'classname' ? ({key: 'class', value: prop.value}) : prop
 const htmlForToFor = prop => prop.key === 'htmlFor' ? ({key: 'for', value: prop.value}) : prop
 
+const addEventToElement = (element, eventKey, eventValue) => {
+  element[eventKey] = eventValue
+  // add event to element list of events
+  element.events = element.events ? element.events.concat(eventKey) : [eventKey]
+}
+
 // handlers that can be filtered on
-// if something gets processed, we return false (using ![])
+// if something gets processed, we return false
 // otherwise, it returns true, indicating that this thing needs to be processed
-const handleOnAttrSetter = element => prop => prop.key.slice(0, 2) === 'on' ? ![element[prop.key] = prop.value] : true
-const handleNamespaceAttrSetter = (element, namespace) => prop => namespace ? ![element.setAttributeNS(null, prop.key, prop.value)] : true
+const handleOnAttrSetter = element => prop => prop.key.slice(0, 2) === 'on' ? addEventToElement(element, prop.key, prop.value) || false : true
+const handleNamespaceAttrSetter = (element, namespace) => prop => namespace ? element.setAttributeNS(null, prop.key, prop.value) || false : true
 const handleAttrSetter = element => prop => element.setAttribute(prop.key, prop.value)
 
 const belitCreateElement = (namespace) => (tag, props, children) => {
