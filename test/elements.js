@@ -99,6 +99,16 @@ test('events are added to element events property', function (t) {
   t.end()
 })
 
+test('events are not added to element attributes', function (t) {
+  t.plan(2)
+  var result = html`<div>
+    <input oninput="onInputFunction" onkeyup="onKeyUpFunction" />
+  </div>`
+  t.notOk(result.querySelector('input').getAttribute('oninput'))
+  t.notOk(result.querySelector('input').getAttribute('input'))
+  t.end()
+})
+
 test('allow objects to be passed', function (t) {
   t.plan(1)
   var result = html`<div>
