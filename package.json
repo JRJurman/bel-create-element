@@ -1,6 +1,6 @@
 {
   "name": "belit",
-  "version": "4.1.1",
+  "version": "4.2.0",
   "description": "A simple function for creating composable DOM elements using tagged template strings.",
   "main": "index.js",
   "scripts": {

@@ -26,7 +26,7 @@ const addEventToElement = (element, eventKey, eventValue) => {
 // if something gets processed, we return false
 // otherwise, it returns true, indicating that this thing needs to be processed
 const handleOnAttrSetter = element => prop => prop.key.slice(0, 2) === 'on' ? addEventToElement(element, prop.key, prop.value) : true
-const handleNamespaceAttrSetter = (element, namespace) => prop => namespace ? element.setAttributeNS(null, prop.key, prop.value) : true
+const handleNamespaceAttrSetter = (element, namespace) => prop => namespace ? element.setAttributeNS(namespace, prop.key, prop.value) : true
 const handleAttrSetter = element => prop => element.setAttribute(prop.key, prop.value)
 
 const belitCreateElement = (namespace) => (tag, props, children) => {
