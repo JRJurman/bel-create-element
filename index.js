@@ -25,9 +25,8 @@ const addEventToElement = (element, eventKey, eventValue) => {
 // handlers that can be filtered on
 // if something gets processed, we return false
 // otherwise, it returns true, indicating that this thing needs to be processed
-const handleOnAttrSetter = element => prop => prop.key.slice(0, 2) === 'on' ? addEventToElement(element, prop.key, prop.value) : true
-const handleNamespaceAttrSetter = (element, namespace) => prop => namespace ? element.setAttributeNS(namespace, prop.key, prop.value) : true
-const handleAttrSetter = element => prop => element.setAttribute(prop.key, prop.value)
+const handleEventSetter = element => prop => prop.key.slice(0, 2) === 'on' ? addEventToElement(element, prop.key, prop.value) : true
+const handleAttrSetter = element => prop => element.setAttributeNS(null, prop.key, prop.value)
 
 const belitCreateElement = (namespace) => (tag, props, children) => {
   // if the tag is a comment
@@ -45,8 +44,7 @@ const belitCreateElement = (namespace) => (tag, props, children) => {
     .map(toObjectList(props))
     .map(normalizeClassName)
     .map(htmlForToFor)
-    .filter(handleOnAttrSetter(element))
-    .filter(handleNamespaceAttrSetter(element, namespace))
+    .filter(handleEventSetter(element))
     .filter(handleAttrSetter(element))
 
   appendChild(element, children)
