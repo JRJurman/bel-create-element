@@ -1,5 +1,5 @@
-/* eslint-disable no-negated-condition, no-return-assign */
-const document = typeof window !== 'undefined' ? window.document : require('domino').createWindow().document
+/* eslint-disable no-negated-condition, no-return-assign no-global-assign */
+document = typeof document !== 'undefined' ? document : require('domino').createWindow().document
 
 const appendChild = require('./appendChild')
 
