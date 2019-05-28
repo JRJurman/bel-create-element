@@ -1,5 +1,5 @@
-/* eslint-disable no-negated-condition */
-const document = typeof window !== 'undefined' ?
+/* eslint-disable no-negated-condition no-global-assign */
+document = typeof window !== 'undefined' ?
   window.document :
   require('domino').createWindow().document
 
