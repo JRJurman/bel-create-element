@@ -1,7 +1,7 @@
 /* eslint-disable no-negated-condition no-global-assign */
-document = typeof window !== 'undefined' ?
-  window.document :
-  require('domino').createWindow().document
+if (typeof document === 'undefined') {
+  document = require('domino').createWindow().document
+}
 
 const parseNodeAsString = node => (typeof node === 'number' ||
                                    typeof node === 'boolean' ||
