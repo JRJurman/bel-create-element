@@ -1,6 +1,6 @@
 {
   "name": "@tram-one/nanohtml",
-  "version": "4.1.6",
+  "version": "4.1.7",
   "description": "A simple function for creating composable DOM elements using tagged template strings.",
   "main": "index.js",
   "scripts": {
@@ -36,7 +36,7 @@
   "devDependencies": {
     "browser-process-hrtime": "^0.1.2",
     "browserify": "^14.4.0",
-    "electron": "^1.7.9",
+    "electron": "^1.8.8",
     "eslint-config-tram-one": "^1.2.0",
     "hyperx": "^2.3.1",
     "is-electron": "^2.1.0",
