@@ -1,4 +1,4 @@
-/* eslint-disable no-negated-condition, no-return-assign no-global-assign */
+/* eslint-disable no-global-assign */
 if (typeof document === 'undefined') {
   document = require('domino').createWindow().document
 }
@@ -30,7 +30,7 @@ const addEventToElement = (element, eventKey, eventValue) => {
 const handleEventSetter = element => prop => prop.key.slice(0, 2) === 'on' ? addEventToElement(element, prop.key, prop.value) : true
 const handleAttrSetter = element => prop => element.setAttributeNS(null, prop.key, prop.value)
 
-const belitCreateElement = (namespace) => (tag, props, children) => {
+const nanoCreateElement = (namespace) => (tag, props, children) => {
   // if the tag is a comment
   if (tag === COMMENT_TAG) {
     return document.createComment(props.comment)
@@ -53,6 +53,6 @@ const belitCreateElement = (namespace) => (tag, props, children) => {
   return element
 }
 
-module.exports = belitCreateElement
-module.exports.html = belitCreateElement()
-module.exports.svg = belitCreateElement('http://www.w3.org/2000/svg')
+module.exports = nanoCreateElement
+module.exports.html = nanoCreateElement()
+module.exports.svg = nanoCreateElement('http://www.w3.org/2000/svg')

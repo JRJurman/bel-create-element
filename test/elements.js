@@ -1,9 +1,9 @@
 var test = require('tape')
-var belit = require('../')
+var nano = require('../')
 var hyperx = require('hyperx')
 
-var html = hyperx(belit.html, {comments: true})
-var svg = hyperx(belit.svg, {comments: true})
+var html = hyperx(nano.html, {comments: true})
+var svg = hyperx(nano.svg, {comments: true})
 
 test('create inputs', function (t) {
   t.plan(5)

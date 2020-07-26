@@ -1,8 +1,8 @@
 var test = require('tape')
-var belit = require('../')()
+var nano = require('../')()
 var hyperx = require('hyperx')
 
-var h = hyperx(belit, {comments: true})
+var h = hyperx(nano, {comments: true})
 
 test('creates an element', function (t) {
   t.plan(3)
