@@ -1,6 +1,6 @@
 {
   "name": "@tram-one/nanohtml",
-  "version": "4.1.7",
+  "version": "4.1.8",
   "description": "A simple function for creating composable DOM elements using tagged template strings.",
   "main": "index.js",
   "scripts": {
@@ -27,9 +27,9 @@
   "author": "Jesse Jurman <j.r.jurman@gmail.com> (http://jrjurman.com)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Tram-One/bel-create-element/issues"
+    "url": "https://github.com/Tram-One/nanohtml/issues"
   },
-  "homepage": "https://github.com/Tram-One/bel-create-element",
+  "homepage": "https://github.com/Tram-One/nanohtml",
   "dependencies": {
     "domino": "^2.0.0"
   },
