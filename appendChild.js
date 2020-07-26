@@ -1,4 +1,4 @@
-/* eslint-disable no-negated-condition no-global-assign */
+/* eslint-disable no-global-assign */
 if (typeof document === 'undefined') {
   document = require('domino').createWindow().document
 }

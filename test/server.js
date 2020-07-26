@@ -1,9 +1,9 @@
 var test = require('tape')
 
-var belit = require('../')()
+var nano = require('../')()
 var hyperx = require('hyperx')
 
-var h = hyperx(belit, {comments: true})
+var h = hyperx(nano, {comments: true})
 
 test('server side render', function (t) {
   t.plan(2)

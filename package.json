@@ -1,5 +1,5 @@
 {
-  "name": "belit",
+  "name": "@tram-one/nanohtml",
   "version": "4.1.5",
   "description": "A simple function for creating composable DOM elements using tagged template strings.",
   "main": "index.js",
@@ -11,12 +11,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/Tram-One/belit"
+    "url": "git://github.com/Tram-One/nanohtml"
   },
   "keywords": [
     "bel",
     "bel-create-element",
     "belit",
+    "nanohtml",
     "virtual-dom",
     "element",
     "diffhtml",
